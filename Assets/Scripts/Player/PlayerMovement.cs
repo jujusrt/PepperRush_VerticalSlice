@@ -33,6 +33,13 @@ public class PlayerMovement : MonoBehaviour
     public float playerHeight = 2f;
     public LayerMask wallMask = ~0;
 
+    public float turnSpeed = 120f;
+    public float acceleration = 8f;
+    public float deceleration = 12f;  
+    float currentSpeed = 0f;
+
+    public float brakeStrength = 40f;
+
     Vector3 moveDirection;
     Rigidbody rb;
 
@@ -47,9 +54,6 @@ public class PlayerMovement : MonoBehaviour
         rb.freezeRotation = true;
 
         readyToJump = true;
-
-        Cursor.lockState = CursorLockMode.Locked;
-        Cursor.visible = false;
     }
 
     private void Update()
@@ -113,27 +117,45 @@ public class PlayerMovement : MonoBehaviour
 
     private void MovePlayer()
     {
-        // dirección basada en la cámara
-        Vector3 forward = cam.transform.forward;
-        Vector3 right = cam.transform.right;
-
-        forward.y = 0;
-        right.y = 0;
-
-        forward.Normalize();
-        right.Normalize();
-
         Vector2 inputValue = input.Player.Move.ReadValue<Vector2>();
-        moveDirection = forward * inputValue.y + right * inputValue.x;
+        float vertical = inputValue.y;
+        float horizontal = inputValue.x;
 
-        // rotar hacia donde nos movemos
-        if (moveDirection.sqrMagnitude > 0.001f)
+        float throttle = Mathf.Clamp01(vertical);
+        bool braking = vertical < 0f;
+
+        float targetSpeed = throttle * moveSpeed;
+
+        if (throttle > 0.01f)
         {
-            Quaternion toRotation = Quaternion.LookRotation(moveDirection, Vector3.up);
-            transform.rotation = Quaternion.Slerp(transform.rotation, toRotation, 10f * Time.deltaTime);
+            currentSpeed = Mathf.MoveTowards(
+                currentSpeed,
+                targetSpeed,
+                acceleration * Time.fixedDeltaTime
+            );
+        }
+        else
+        {
+            currentSpeed = Mathf.MoveTowards(
+                currentSpeed,
+                0f,
+                deceleration * Time.fixedDeltaTime
+            );
         }
 
-        // wall slide
+
+        if (Mathf.Abs(horizontal) > 0.01f)
+        {
+            float turnAmount = horizontal * turnSpeed * Time.fixedDeltaTime;
+            transform.Rotate(0f, turnAmount, 0f);
+        }
+
+        Vector3 forward = transform.forward;
+        forward.y = 0f;
+        forward.Normalize();
+
+        moveDirection = forward * throttle;
+
         if (moveDirection.sqrMagnitude > 0.0001f)
         {
             Vector3 dir = moveDirection.normalized;
@@ -143,8 +165,8 @@ public class PlayerMovement : MonoBehaviour
 
             Vector3 center = transform.position + Vector3.up * (playerHeight * 0.5f);
 
-            Vector3 p1 = center + Vector3.up * halfHeight; // arriba
-            Vector3 p2 = center - Vector3.up * halfHeight; // abajo
+            Vector3 p1 = center + Vector3.up * halfHeight;
+            Vector3 p2 = center - Vector3.up * halfHeight; 
 
             if (Physics.CapsuleCast(p1, p2, wallRadius, dir, out RaycastHit hit,
                 wallCheckDistance, wallMask, QueryTriggerInteraction.Ignore))
@@ -157,9 +179,25 @@ public class PlayerMovement : MonoBehaviour
             }
         }
 
-        // aplicar fuerza de movimiento
         float mult = grounded ? 1f : airMultiplier;
-        rb.AddForce(moveDirection.normalized * moveSpeed * 10f * mult, ForceMode.Force);
+
+        if (moveDirection.sqrMagnitude > 0.0001f && currentSpeed > 0.1f)
+        {
+            rb.AddForce(moveDirection.normalized * currentSpeed * 10f * mult, ForceMode.Force);
+        }
+
+
+        if (braking && grounded)
+        {
+            Vector3 flatVel = new Vector3(rb.linearVelocity.x, 0f, rb.linearVelocity.z);
+            float speed = flatVel.magnitude;
+
+            if (speed > 0.1f)
+            {
+                Vector3 brakeDir = -flatVel.normalized;
+                rb.AddForce(brakeDir * brakeStrength, ForceMode.Acceleration);
+            }
+        }
     }
 
     private void SpeedControl()
@@ -177,5 +215,11 @@ public class PlayerMovement : MonoBehaviour
     {
         rb.linearVelocity = new Vector3(rb.linearVelocity.x, 0f, rb.linearVelocity.z);
         rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
+    }
+
+    private void OnDestroy()
+    {
+        input.Player.Disable();
+        input.UI.Disable();
     }
 }
