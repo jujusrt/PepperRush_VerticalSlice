@@ -8,14 +8,8 @@ public class PlayerMovement : MonoBehaviour
     public float moveSpeed;
 
     public float groundDrag;
-
-    public float jumpForce;
-    public float jumpCooldown;
     public float airMultiplier;
     public bool readyToJump;
-
-    public float coyoteTime = 0.15f;
-    float coyoteTimer = 0f;
 
     public float walkSpeed;
     public float sprintSpeed;
@@ -43,8 +37,6 @@ public class PlayerMovement : MonoBehaviour
     Vector3 moveDirection;
     Rigidbody rb;
 
-    float jumpCooldownTimer = 0f;
-
     private void Start()
     {
         input = new InputSystem_Actions();
@@ -60,30 +52,8 @@ public class PlayerMovement : MonoBehaviour
     {
         GroundCheck();
 
-        // coyote time
-        if (grounded)
-        {
-            coyoteTimer = coyoteTime;
-        }
-        else
-        {
-            coyoteTimer -= Time.deltaTime;
-        }
-
-        // input salto
-        MyInput();
-
-        // cooldown del salto
-        if (!readyToJump)
-        {
-            jumpCooldownTimer -= Time.deltaTime;
-            if (jumpCooldownTimer <= 0f)
-                readyToJump = true;
-        }
-
         SpeedControl();
 
-        // drag
         rb.linearDamping = grounded ? groundDrag : 0f;
     }
 
@@ -102,17 +72,6 @@ public class PlayerMovement : MonoBehaviour
             whatIsGround,
             QueryTriggerInteraction.Ignore
         );
-    }
-
-    private void MyInput()
-    {
-        if (input.Player.Jump.WasPressedThisFrame() && readyToJump && coyoteTimer > 0f)
-        {
-            readyToJump = false;
-            jumpCooldownTimer = jumpCooldown;
-
-            Jump();
-        }
     }
 
     private void MovePlayer()
@@ -209,12 +168,6 @@ public class PlayerMovement : MonoBehaviour
             Vector3 limitedVel = flatVel.normalized * moveSpeed;
             rb.linearVelocity = new Vector3(limitedVel.x, rb.linearVelocity.y, limitedVel.z);
         }
-    }
-
-    private void Jump()
-    {
-        rb.linearVelocity = new Vector3(rb.linearVelocity.x, 0f, rb.linearVelocity.z);
-        rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
     }
 
     private void OnDestroy()
