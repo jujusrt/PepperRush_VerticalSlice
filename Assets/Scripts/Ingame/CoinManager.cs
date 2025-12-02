@@ -23,4 +23,6 @@ public class CoinManager : MonoBehaviour
     {
         coinText.text = coins.ToString("00");
     }
+
+    public int Coins => coins;
 }

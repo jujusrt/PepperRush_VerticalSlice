@@ -1,7 +1,7 @@
-using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using TMPro;
 
 public class LevelTimer : MonoBehaviour
 {
@@ -19,13 +19,22 @@ public class LevelTimer : MonoBehaviour
     public Sprite starOn;
     public Sprite starOff;
 
+    public TextMeshProUGUI coinsCollectedText;
+    private int maxCoins = 10;
+
 
     private void Start()
     {
         currentTime = startTime;
 
-        if (victoryPanel != null) victoryPanel.SetActive(false);
-        if (defeatPanel != null) defeatPanel.SetActive(false);
+        if (victoryPanel != null)
+        {
+            victoryPanel.SetActive(false);
+        }
+        if (defeatPanel != null)
+        {
+            defeatPanel.SetActive(false);
+        }
     }
 
     private void Update()
@@ -55,20 +64,31 @@ public class LevelTimer : MonoBehaviour
 
     public void PlayerReachedGoal()
     {
-        if (levelFinished) return;
+        if (levelFinished)
+        {
+            return;
+        }
 
         levelFinished = true;
 
         int stars = 0;
 
-        if (currentTime > 30f)
+        if (CoinManager.instance.Coins >= 8f)
+        {
             stars = 3;
-        else if (currentTime > 15f)
+        }
+        else if (CoinManager.instance.Coins >= 5f)
+        {
             stars = 2;
-        else if (currentTime > 0f)
+        }
+        else if (CoinManager.instance.Coins >= 3f)
+        {
             stars = 1;
+        }
         else
+        {
             stars = 0;
+        }
 
         ShowVictory(stars);
     }
@@ -86,18 +106,34 @@ public class LevelTimer : MonoBehaviour
     {
         Time.timeScale = 0f;
         if (victoryPanel != null)
+        {
             victoryPanel.SetActive(true);
+        }
+
+        if (coinsCollectedText != null && CoinManager.instance != null)
+        {
+            coinsCollectedText.text = "You collected \n"
+                           + CoinManager.instance.Coins + " of " + maxCoins + " coins!";
+
+        }
 
         if (starImages != null && starImages.Length > 0)
         {
             for (int i = 0; i < starImages.Length; i++)
             {
-                if (starImages[i] == null) continue;
+                if (starImages[i] == null)
+                {
+                    continue;
+                }
 
                 if (i < stars)
+                {
                     starImages[i].sprite = starOn;
+                }   
                 else
+                {
                     starImages[i].sprite = starOff;
+                } 
             }
         }
     }
@@ -107,7 +143,9 @@ public class LevelTimer : MonoBehaviour
         Time.timeScale = 0f;
 
         if (defeatPanel != null)
+        {
             defeatPanel.SetActive(true);
+        }
     }
     public void RestartLevel()
     {
