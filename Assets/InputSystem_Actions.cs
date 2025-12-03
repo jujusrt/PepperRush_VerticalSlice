@@ -181,6 +181,51 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Menu"",
+                    ""type"": ""Button"",
+                    ""id"": ""e1571e44-5aba-419f-be22-6eeb6be119af"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Scene1"",
+                    ""type"": ""Button"",
+                    ""id"": ""0f5263b9-533a-4e41-a510-33a59f4d4827"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Scene2"",
+                    ""type"": ""Button"",
+                    ""id"": ""0a0474fa-493c-4f78-9181-e3ca76f0bbc2"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Scene3"",
+                    ""type"": ""Button"",
+                    ""id"": ""7adb2ee4-269d-4f63-90ea-b2668597a66c"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""MenuSce"",
+                    ""type"": ""Button"",
+                    ""id"": ""277b7582-58a8-45fe-a432-0f14393c5282"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -577,6 +622,61 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""Shoot"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""b1370f52-6362-4b08-b33e-90db63bff8d4"",
+                    ""path"": ""<Keyboard>/escape"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Menu"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""898cd210-a40d-4e21-b47c-16689cf562da"",
+                    ""path"": ""<Keyboard>/f1"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Scene1"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""5cffe471-8b6e-4548-8236-cdaf4c384b41"",
+                    ""path"": ""<Keyboard>/f2"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Scene2"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""fbf91921-e237-453a-9690-e510f5ef7751"",
+                    ""path"": ""<Keyboard>/f3"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Scene3"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""c1fe0383-6514-4bcf-a7ff-a7a1a0a9f12a"",
+                    ""path"": ""<Keyboard>/f5"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""MenuSce"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -1174,6 +1274,11 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
         m_Player_Next = m_Player.FindAction("Next", throwIfNotFound: true);
         m_Player_Sprint = m_Player.FindAction("Sprint", throwIfNotFound: true);
         m_Player_Shoot = m_Player.FindAction("Shoot", throwIfNotFound: true);
+        m_Player_Menu = m_Player.FindAction("Menu", throwIfNotFound: true);
+        m_Player_Scene1 = m_Player.FindAction("Scene1", throwIfNotFound: true);
+        m_Player_Scene2 = m_Player.FindAction("Scene2", throwIfNotFound: true);
+        m_Player_Scene3 = m_Player.FindAction("Scene3", throwIfNotFound: true);
+        m_Player_MenuSce = m_Player.FindAction("MenuSce", throwIfNotFound: true);
         // UI
         m_UI = asset.FindActionMap("UI", throwIfNotFound: true);
         m_UI_Navigate = m_UI.FindAction("Navigate", throwIfNotFound: true);
@@ -1277,6 +1382,11 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
     private readonly InputAction m_Player_Next;
     private readonly InputAction m_Player_Sprint;
     private readonly InputAction m_Player_Shoot;
+    private readonly InputAction m_Player_Menu;
+    private readonly InputAction m_Player_Scene1;
+    private readonly InputAction m_Player_Scene2;
+    private readonly InputAction m_Player_Scene3;
+    private readonly InputAction m_Player_MenuSce;
     /// <summary>
     /// Provides access to input actions defined in input action map "Player".
     /// </summary>
@@ -1328,6 +1438,26 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
         /// Provides access to the underlying input action "Player/Shoot".
         /// </summary>
         public InputAction @Shoot => m_Wrapper.m_Player_Shoot;
+        /// <summary>
+        /// Provides access to the underlying input action "Player/Menu".
+        /// </summary>
+        public InputAction @Menu => m_Wrapper.m_Player_Menu;
+        /// <summary>
+        /// Provides access to the underlying input action "Player/Scene1".
+        /// </summary>
+        public InputAction @Scene1 => m_Wrapper.m_Player_Scene1;
+        /// <summary>
+        /// Provides access to the underlying input action "Player/Scene2".
+        /// </summary>
+        public InputAction @Scene2 => m_Wrapper.m_Player_Scene2;
+        /// <summary>
+        /// Provides access to the underlying input action "Player/Scene3".
+        /// </summary>
+        public InputAction @Scene3 => m_Wrapper.m_Player_Scene3;
+        /// <summary>
+        /// Provides access to the underlying input action "Player/MenuSce".
+        /// </summary>
+        public InputAction @MenuSce => m_Wrapper.m_Player_MenuSce;
         /// <summary>
         /// Provides access to the underlying input action map instance.
         /// </summary>
@@ -1384,6 +1514,21 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
             @Shoot.started += instance.OnShoot;
             @Shoot.performed += instance.OnShoot;
             @Shoot.canceled += instance.OnShoot;
+            @Menu.started += instance.OnMenu;
+            @Menu.performed += instance.OnMenu;
+            @Menu.canceled += instance.OnMenu;
+            @Scene1.started += instance.OnScene1;
+            @Scene1.performed += instance.OnScene1;
+            @Scene1.canceled += instance.OnScene1;
+            @Scene2.started += instance.OnScene2;
+            @Scene2.performed += instance.OnScene2;
+            @Scene2.canceled += instance.OnScene2;
+            @Scene3.started += instance.OnScene3;
+            @Scene3.performed += instance.OnScene3;
+            @Scene3.canceled += instance.OnScene3;
+            @MenuSce.started += instance.OnMenuSce;
+            @MenuSce.performed += instance.OnMenuSce;
+            @MenuSce.canceled += instance.OnMenuSce;
         }
 
         /// <summary>
@@ -1425,6 +1570,21 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
             @Shoot.started -= instance.OnShoot;
             @Shoot.performed -= instance.OnShoot;
             @Shoot.canceled -= instance.OnShoot;
+            @Menu.started -= instance.OnMenu;
+            @Menu.performed -= instance.OnMenu;
+            @Menu.canceled -= instance.OnMenu;
+            @Scene1.started -= instance.OnScene1;
+            @Scene1.performed -= instance.OnScene1;
+            @Scene1.canceled -= instance.OnScene1;
+            @Scene2.started -= instance.OnScene2;
+            @Scene2.performed -= instance.OnScene2;
+            @Scene2.canceled -= instance.OnScene2;
+            @Scene3.started -= instance.OnScene3;
+            @Scene3.performed -= instance.OnScene3;
+            @Scene3.canceled -= instance.OnScene3;
+            @MenuSce.started -= instance.OnMenuSce;
+            @MenuSce.performed -= instance.OnMenuSce;
+            @MenuSce.canceled -= instance.OnMenuSce;
         }
 
         /// <summary>
@@ -1795,6 +1955,41 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
         /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
         /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
         void OnShoot(InputAction.CallbackContext context);
+        /// <summary>
+        /// Method invoked when associated input action "Menu" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnMenu(InputAction.CallbackContext context);
+        /// <summary>
+        /// Method invoked when associated input action "Scene1" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnScene1(InputAction.CallbackContext context);
+        /// <summary>
+        /// Method invoked when associated input action "Scene2" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnScene2(InputAction.CallbackContext context);
+        /// <summary>
+        /// Method invoked when associated input action "Scene3" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnScene3(InputAction.CallbackContext context);
+        /// <summary>
+        /// Method invoked when associated input action "MenuSce" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnMenuSce(InputAction.CallbackContext context);
     }
     /// <summary>
     /// Interface to implement callback methods for all input action callbacks associated with input actions defined by "UI" which allows adding and removing callbacks.
