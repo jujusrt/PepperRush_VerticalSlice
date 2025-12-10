@@ -31,6 +31,7 @@ public class PlayerMovement : MonoBehaviour
     public float acceleration = 8f;
     public float deceleration = 12f;  
     float currentSpeed = 0f;
+    public float reverseSpeed = 5f;
 
     public float brakeStrength = 40f;
 
@@ -80,10 +81,12 @@ public class PlayerMovement : MonoBehaviour
         float vertical = inputValue.y;
         float horizontal = inputValue.x;
 
-        float throttle = Mathf.Clamp01(vertical);
-        bool braking = vertical < 0f;
+        float throttle = Mathf.Abs(vertical);
+        bool goingBackwards = vertical < 0f;
 
-        float targetSpeed = throttle * moveSpeed;
+        float targetSpeed = goingBackwards ? reverseSpeed : moveSpeed;
+        targetSpeed *= throttle;
+
 
         if (throttle > 0.01f)
         {
@@ -113,7 +116,8 @@ public class PlayerMovement : MonoBehaviour
         forward.y = 0f;
         forward.Normalize();
 
-        moveDirection = forward * throttle;
+        moveDirection = goingBackwards ? -forward * throttle : forward * throttle;
+
 
         if (moveDirection.sqrMagnitude > 0.0001f)
         {
@@ -146,7 +150,7 @@ public class PlayerMovement : MonoBehaviour
         }
 
 
-        if (braking && grounded)
+        if (goingBackwards && grounded && currentSpeed > 1f)
         {
             Vector3 flatVel = new Vector3(rb.linearVelocity.x, 0f, rb.linearVelocity.z);
             float speed = flatVel.magnitude;

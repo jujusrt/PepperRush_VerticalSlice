@@ -27,19 +27,18 @@ public class PauseMenuController : MonoBehaviour
         {
             if (isOpen)
             {
-                Time.timeScale = 1f;
                 CloseMenu();
             }
             else
             {
                 OpenMenu();
-                Time.timeScale = 0f;
             }
         }
     }
 
     public void OpenMenu()
     {
+        Time.timeScale = 0f;
         isOpen = true;
 
         if (pauseMenuPanel != null)
@@ -50,6 +49,7 @@ public class PauseMenuController : MonoBehaviour
 
     public void CloseMenu()
     {
+        Time.timeScale = 1f;
         isOpen = false;
 
         if (pauseMenuPanel != null)

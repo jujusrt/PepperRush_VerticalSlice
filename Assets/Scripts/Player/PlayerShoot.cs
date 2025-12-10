@@ -33,16 +33,18 @@ public class PlayerShoot : MonoBehaviour
         Vector2 mousePos = Mouse.current.position.ReadValue();
 
         Ray ray = cam.ScreenPointToRay(mousePos);
-        Plane groundPlane = new Plane(Vector3.up, Vector3.zero);
+
+        Plane groundPlane = new Plane(
+            Vector3.up,
+            new Vector3(0f, firePoint.position.y, 0f)
+        );
 
         float enter;
         if (groundPlane.Raycast(ray, out enter))
         {
             Vector3 hitPoint = ray.GetPoint(enter);
 
-            Vector3 dir = hitPoint - firePoint.position;
-            dir.y = 0f;
-            dir.Normalize();
+            Vector3 dir = (hitPoint - firePoint.position).normalized;
 
             GameObject bullet = Instantiate(
                 bulletPrefab,
@@ -54,6 +56,7 @@ public class PlayerShoot : MonoBehaviour
             rb.linearVelocity = dir * bulletSpeed;
         }
     }
+
 
     private void OnDestroy()
     {
