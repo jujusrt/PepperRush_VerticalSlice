@@ -123,6 +123,7 @@ MonoBehaviour:
   turnSpeed: 120
   acceleration: 8
   deceleration: 12
+  reverseSpeed: 5
   brakeStrength: 40
 --- !u!114 &8386602019260212437
 MonoBehaviour:
