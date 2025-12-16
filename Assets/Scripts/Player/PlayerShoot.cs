@@ -13,6 +13,8 @@ public class PlayerShoot : MonoBehaviour
     public float fireRate = 0.3f;
     private float nextShootTime = 0f;
 
+    public AudioClip pepperoniSound;
+
 
     private void Start()
     {
@@ -23,6 +25,7 @@ public class PlayerShoot : MonoBehaviour
     {
         if (input.Player.Shoot.IsPressed() && Time.time >= nextShootTime)
         {
+            AudioManager.Instance.PlaySFX(pepperoniSound);
             Shoot();
             nextShootTime = Time.time + fireRate;
         }

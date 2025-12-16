@@ -3,6 +3,7 @@ using UnityEngine;
 public class Coin : MonoBehaviour
 {
     public float rotationSpeed = 120f;
+    public AudioClip coinSound;
 
     void Update()
     {
@@ -14,6 +15,7 @@ public class Coin : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             CoinManager.instance.AddCoin();
+            AudioManager.Instance.PlaySFX(coinSound);
             Destroy(gameObject);
         }
     }

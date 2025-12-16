@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 4195754208859993835}
   - component: {fileID: 8386602019260212437}
   - component: {fileID: 6793400378753097963}
+  - component: {fileID: 8109473166641787281}
   m_Layer: 6
   m_Name: Player
   m_TagString: Player
@@ -121,8 +122,8 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 4294967295
   turnSpeed: 120
-  acceleration: 8
-  deceleration: 12
+  acceleration: 10
+  deceleration: 10
   reverseSpeed: 5
   brakeStrength: 40
 --- !u!114 &8386602019260212437
@@ -142,6 +143,7 @@ MonoBehaviour:
   bulletPrefab: {fileID: 3671444127204784023, guid: c8ce18f3b6e30324abf6f4bc4f62ebde, type: 3}
   bulletSpeed: 20
   fireRate: 0.3
+  pepperoniSound: {fileID: 8300000, guid: 8e65164bf5078d74d8a6f6287a72156e, type: 3}
 --- !u!114 &6793400378753097963
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -154,6 +156,25 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8bf1327e07cc4db409f58ccf723fdd32, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &8109473166641787281
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 660303831415020693}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1a1ce75db61b9a94882580a723214695, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  movement: {fileID: 4195754208859993835}
+  engineLoop: {fileID: 8300000, guid: 86b6753fe6033c044a490102c687bee4, type: 3}
+  turnSfx: {fileID: 8300000, guid: 2987f0f3a2c4b4348b02c489376a8ca7, type: 3}
+  minPitch: 0.8
+  maxPitch: 1.6
+  minVolume: 0.15
+  maxVolume: 0.8
 --- !u!1 &1459716032719655895
 GameObject:
   m_ObjectHideFlags: 0
@@ -315,7 +336,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: -8679921383154817045, guid: e615fbebd3538e046b71f337aa7d6073, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0.15
+      value: -0.008
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: e615fbebd3538e046b71f337aa7d6073, type: 3}
       propertyPath: m_LocalPosition.y

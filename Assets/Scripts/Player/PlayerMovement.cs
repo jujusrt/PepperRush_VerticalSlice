@@ -36,7 +36,8 @@ public class PlayerMovement : MonoBehaviour
     public float brakeStrength = 40f;
 
     Vector3 moveDirection;
-    Rigidbody rb;
+    public Rigidbody rb { get; private set; }
+
 
     private void Start()
     {

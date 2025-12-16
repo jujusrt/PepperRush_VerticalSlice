@@ -67,6 +67,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ed009d0c281583e4283e2e11e06254f0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  destroySfx: {fileID: 8300000, guid: 4dc9a7f70f74fc945b8ff18c1d573986, type: 3}
 --- !u!1 &4124754824057485254
 GameObject:
   m_ObjectHideFlags: 0

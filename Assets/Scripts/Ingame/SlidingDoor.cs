@@ -11,6 +11,7 @@ public class SlidingDoor : MonoBehaviour
     public float speed = 3f;
 
     private bool opening = false;
+    public AudioClip openDoorSfx;
 
     void Update()
     {
@@ -36,6 +37,13 @@ public class SlidingDoor : MonoBehaviour
     }
     public void OpenDoor()
     {
+        if (opening) return;
+
         opening = true;
+
+        if (AudioManager.Instance != null)
+        {
+            AudioManager.Instance.PlaySFX(openDoorSfx);
+        }
     }
 }
