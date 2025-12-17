@@ -13,6 +13,8 @@ public class SlidingDoor : MonoBehaviour
     private bool opening = false;
     public AudioClip openDoorSfx;
 
+    [SerializeField] private GameObject endParticles;
+
     void Update()
     {
         if (!opening) return;
@@ -45,5 +47,11 @@ public class SlidingDoor : MonoBehaviour
         {
             AudioManager.Instance.PlaySFX(openDoorSfx);
         }
+
+        GameObject fx = Instantiate(
+                endParticles,
+                transform.position,
+                Quaternion.identity
+            );
     }
 }

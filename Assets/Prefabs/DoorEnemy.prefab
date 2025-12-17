@@ -68,6 +68,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   destroySfx: {fileID: 8300000, guid: 4dc9a7f70f74fc945b8ff18c1d573986, type: 3}
+  destroyParticles: {fileID: 5880797563127281583, guid: 265d3a5ba69981a4698ceabcedf368b0, type: 3}
+  boomParticles: {fileID: 5339739117810204693, guid: 26e1cb216e3635e4a820f58a1118d6b9, type: 3}
 --- !u!1001 &7629496791898607789
 PrefabInstance:
   m_ObjectHideFlags: 0

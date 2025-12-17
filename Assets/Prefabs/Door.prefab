@@ -301,6 +301,7 @@ MonoBehaviour:
   rightOpenPoint: {fileID: 1041144644630956424}
   speed: 3
   openDoorSfx: {fileID: 8300000, guid: e8aed31713a5f4a47833bec72e6822b8, type: 3}
+  endParticles: {fileID: 1978689737715041617, guid: afa54037ffe627545886e2741abb365d, type: 3}
 --- !u!1 &5891739540848513959
 GameObject:
   m_ObjectHideFlags: 0

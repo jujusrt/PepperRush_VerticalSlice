@@ -69,6 +69,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rotationSpeed: 120
   coinSound: {fileID: 8300000, guid: e501359b954ff5c4a89eeaeb780fc324, type: 3}
+  pickupParticles: {fileID: 8771972552311404799, guid: bbf9e36a48d6c5648a13889afab076fd, type: 3}
 --- !u!1001 &921049856688960364
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -15,6 +15,8 @@ public class PlayerShoot : MonoBehaviour
 
     public AudioClip pepperoniSound;
 
+    [SerializeField] GameObject lanzarParticles;
+
 
     private void Start()
     {
@@ -53,6 +55,12 @@ public class PlayerShoot : MonoBehaviour
                 bulletPrefab,
                 firePoint.position,
                 bulletPrefab.transform.rotation
+            );
+
+            GameObject fx = Instantiate(
+                lanzarParticles,
+                transform.position,
+                Quaternion.identity
             );
 
             Rigidbody rb = bullet.GetComponent<Rigidbody>();
